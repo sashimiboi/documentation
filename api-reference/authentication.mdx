@@ -40,7 +40,7 @@ curl -X GET https://your-store.toebox.ai/api/agents \
 The MCP endpoint uses the same API key but passes it as a query parameter:
 
 ```
-https://your-store.toebox.ai/mcp?api_key=tb_your-api-key
+https://app.toebox.ai/mcp?api_key=tb_your-api-key
 ```
 
 This format is required for compatibility with MCP clients (Claude Desktop, Cursor, etc.) that do not support custom headers.
@@ -51,7 +51,7 @@ This format is required for compatibility with MCP clients (Claude Desktop, Curs
 {
   "mcpServers": {
     "toebox": {
-      "url": "https://your-store.toebox.ai/mcp?api_key=tb_your-api-key"
+      "url": "https://app.toebox.ai/mcp?api_key=tb_your-api-key"
     }
   }
 }
