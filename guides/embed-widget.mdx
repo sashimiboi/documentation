@@ -1,0 +1,87 @@
+---
+title: "Embedding the Widget"
+description: "How to embed the ToeBox chatbot on your storefront or custom pages"
+---
+
+ToeBox provides multiple ways to deploy the chatbot widget on your website.
+
+## Auto-injection on Shopify
+
+When you create a chatbot in ToeBox, the widget script is **automatically injected** into your Shopify storefront. No manual code changes are needed.
+
+The script is loaded via Shopify's app embed blocks, which means:
+
+- It works with all Shopify themes (Online Store 2.0 and legacy)
+- It does not require editing your theme's `theme.liquid` file
+- It loads asynchronously and does not block page rendering
+
+<Note>Make sure ToeBox's app embed is enabled in your Shopify theme editor under **Online Store > Themes > Customize > App embeds**.</Note>
+
+## Script tag embed
+
+If you need to manually embed the widget on a non-Shopify page or a custom landing page, use the script tag:
+
+```html
+<script
+  src="https://your-store.toebox.ai/embed/chatbot.js"
+  data-chatbot-id="your-chatbot-id"
+  async
+></script>
+```
+
+Replace `your-store` with your ToeBox subdomain and `your-chatbot-id` with the chatbot ID from your dashboard.
+
+### Finding your embed code
+
+1. Navigate to **Chatbot** in ToeBox
+2. Click on your chatbot configuration
+3. Click the **Copy Embed Code** button
+4. Paste the script tag into your page's HTML
+
+## Manual embedding on custom pages
+
+For more control, you can embed the widget in specific locations:
+
+```html
+<!-- Place in the <head> or before </body> -->
+<script
+  src="https://your-store.toebox.ai/embed/chatbot.js"
+  data-chatbot-id="your-chatbot-id"
+  data-position="bottom-right"
+  data-primary-color="#303030"
+  async
+></script>
+```
+
+### Configuration attributes
+
+| Attribute | Description | Default |
+|-----------|-------------|---------|
+| `data-chatbot-id` | Your chatbot ID (required) | -- |
+| `data-position` | Widget position: `bottom-right` or `bottom-left` | `bottom-right` |
+| `data-primary-color` | Override primary color | From chatbot config |
+| `data-bubble-style` | Override bubble style: `rounded`, `square`, `pill` | From chatbot config |
+
+## Testing the widget
+
+Before going live, test your widget thoroughly:
+
+<Steps>
+  <Step title="Preview in ToeBox">
+    Use the built-in preview panel in the chatbot builder to see how the widget looks and responds.
+  </Step>
+
+  <Step title="Check your storefront">
+    Visit your Shopify store in a browser. The widget should appear in the configured position.
+  </Step>
+
+  <Step title="Test on mobile">
+    Open your store on a mobile device or use browser dev tools to verify the widget is responsive.
+  </Step>
+
+  <Step title="Test conversations">
+    Send several messages to verify the agent responds correctly and that Shopify tools (product search, checkout) are working.
+  </Step>
+</Steps>
+
+<Tip>Use an incognito/private browser window when testing to simulate a first-time visitor experience.</Tip>

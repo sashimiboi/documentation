@@ -1,0 +1,77 @@
+---
+title: "Agent Tools"
+description: "Tools and capabilities available to your ToeBox agents"
+---
+
+ToeBox agents can use tools to interact with external systems, query data, and take actions on behalf of your customers. Tools are connected via the Model Context Protocol (MCP).
+
+## MCP tool connections
+
+MCP (Model Context Protocol) tools connect your agents to live data and actions. ToeBox includes built-in connections to Shopify's official MCP servers:
+
+### Shopify Catalog
+
+Lets your agent search and browse products across your Shopify store.
+
+**Capabilities:**
+- Search products by keyword, category, or attribute
+- Retrieve product details (title, description, price, images, variants)
+- Filter by price range and availability
+- Browse collections
+
+**Endpoint:** `https://discover.shopifyapps.com/global/mcp`
+
+### Shopify Checkout
+
+Lets your agent create checkout sessions and guide customers through purchases.
+
+**Capabilities:**
+- Create checkout sessions
+- Collect buyer information
+- Attach payment methods
+- Complete purchases
+
+**Endpoint:** `https://{shop-domain}/api/ucp/mcp`
+
+<Note>MCP tools are auto-configured based on your agent type. For example, a **Product Recommendation** agent automatically enables the Catalog tool, while a **Sales Assistant** enables both Catalog and Checkout.</Note>
+
+## Data tools
+
+When you connect data sources (Snowflake, PostgreSQL, or other databases), your agents gain access to built-in data tools:
+
+| Tool | Description |
+|------|-------------|
+| `list_tables` | Lists all tables in the connected database |
+| `describe_table` | Returns column names, types, and metadata for a specific table |
+| `query_database` | Executes a read-only SQL query and returns results |
+
+These tools let agents answer data-driven questions like "What were our top-selling products last month?" by querying your data warehouse directly.
+
+<Warning>Data tools execute read-only queries. Write operations (INSERT, UPDATE, DELETE) are blocked at the connector level for safety.</Warning>
+
+## Custom SQL tools
+
+You can create custom SQL tools that wrap a specific query behind a friendly name and description. This is useful for:
+
+- Giving agents access to a frequently-used report
+- Restricting what data an agent can access
+- Pre-building complex queries so the agent does not need to generate SQL
+
+To create a custom SQL tool:
+
+1. Go to your agent's configuration
+2. Open the **Custom Tools** section
+3. Click **Add Tool**
+4. Provide a name, description, and SQL query
+5. The agent can then call this tool by name during conversations
+
+## Custom tool builder
+
+For advanced use cases, the custom tool builder lets you define tools with:
+
+- **Name** -- What the agent calls this tool
+- **Description** -- Helps the AI understand when to use the tool
+- **Parameters** -- Input parameters the tool accepts (with types and descriptions)
+- **SQL query** -- The query to execute, with parameter placeholders
+
+<Tip>Write clear tool descriptions. The AI model uses the description to decide when to call a tool, so be specific about what it does and when it should be used.</Tip>

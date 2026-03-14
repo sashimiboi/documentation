@@ -1,0 +1,93 @@
+---
+title: "Creating Agents"
+description: "How to create and configure AI agents in ToeBox"
+---
+
+Agents are the core of ToeBox. Each agent is an AI-powered assistant configured for a specific task on your Shopify store.
+
+## Agent types
+
+When creating an agent, you select a type that pre-configures recommended tools and system prompts:
+
+| Type | Best for |
+|------|----------|
+| **Customer Support** | Answering product questions, handling inquiries |
+| **Product Recommendation** | Helping shoppers find the right products |
+| **Order Management** | Order status, tracking, modifications |
+| **Marketing** | Campaign copy, promotions, product descriptions |
+| **Inventory Management** | Stock levels, restocking alerts |
+| **Returns & Exchanges** | Processing returns, exchange policies |
+| **Shipping & Fulfillment** | Shipping rates, delivery estimates |
+| **Loyalty & Rewards** | Points programs, reward redemption |
+| **Content & SEO** | Product descriptions, meta tags, blog content |
+| **Sales Assistant** | Guided selling, upselling, cross-selling |
+| **Analytics & Reporting** | Data insights, report generation |
+| **Custom** | Build from scratch with no defaults |
+
+## Creating an agent
+
+<Steps>
+  <Step title="Open the Agents page">
+    Navigate to **Agents** in the ToeBox sidebar. Click **Create Agent**.
+  </Step>
+
+  <Step title="Configure basic settings">
+    - **Name** -- A descriptive name for your agent (e.g., "Product Finder Bot").
+    - **Type** -- Select from the list above. This pre-selects recommended MCP tools.
+    - **Description** (optional) -- A short summary of what this agent does.
+  </Step>
+
+  <Step title="Choose a model">
+    Select the AI model that powers your agent. Available models include:
+
+    **Anthropic (Direct)**
+    - Claude Sonnet 4.6 -- Fast, capable. Best for most agent tasks.
+    - Claude Haiku 4.5 -- Fastest and cheapest. Good for simple lookups.
+    - Claude Opus 4.6 -- Most capable. Best for complex orchestration.
+
+    **OpenRouter**
+    - GPT-4o, GPT-4.1, GPT-4.1 Mini (OpenAI)
+    - Gemini 2.5 Flash, Gemini 2.5 Pro (Google)
+    - Llama 4 Scout (Meta, free tier)
+    - DeepSeek V3 (free tier)
+
+    **AWS Bedrock**
+    - Claude Sonnet 4.6 (Bedrock)
+    - Claude Haiku 4.5 (Bedrock)
+
+    <Tip>Claude Sonnet 4.6 is the default and recommended model. It balances speed, quality, and cost for most Shopify agent use cases.</Tip>
+  </Step>
+
+  <Step title="Write a system prompt">
+    The system prompt defines your agent's personality, tone, and behavior. Each agent type generates a sensible default, but you can customize it.
+
+    A good system prompt includes:
+    - The agent's role and persona
+    - What it should and should not do
+    - Tone of voice (friendly, professional, casual)
+    - Any store-specific policies (return windows, shipping thresholds)
+  </Step>
+
+  <Step title="Adjust advanced settings">
+    - **Temperature** (0.0 - 1.0) -- Controls randomness. Lower values produce more focused responses. Default: 0.7.
+    - **Max Tokens** -- Maximum response length. Default: 4096.
+    - **Timeout** -- How long to wait for a response. Default: 30 seconds.
+    - **Max Retries** -- Number of retry attempts on failure. Default: 3.
+  </Step>
+
+  <Step title="Save and test">
+    Click **Save** to create your agent. Then click the **Test** button on the agent card to open the test chat panel and verify it works as expected.
+  </Step>
+</Steps>
+
+## Agent knowledge base
+
+You can upload files to give your agent additional context. Supported file types include PDF, TXT, CSV, and Markdown. Uploaded files are parsed and made available to the agent during conversations.
+
+<Note>Knowledge base files are stored securely and are only accessible to your agent. They are not shared across agents.</Note>
+
+## Editing and deleting agents
+
+- Click an agent card to edit its configuration at any time.
+- Delete an agent by clicking the delete icon on the agent card. This action is permanent.
+- If an agent is linked to a chatbot, you must update the chatbot configuration before deleting the agent.

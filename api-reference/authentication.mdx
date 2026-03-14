@@ -1,0 +1,77 @@
+---
+title: "Authentication"
+description: "How to authenticate with the ToeBox API"
+---
+
+All ToeBox API endpoints require authentication. ToeBox uses API keys for authentication.
+
+## Getting your API key
+
+<Steps>
+  <Step title="Open Settings">
+    Navigate to **Settings** in the ToeBox sidebar.
+  </Step>
+
+  <Step title="Find your API key">
+    Under the **API Keys** section, you will see your ToeBox API key. Click **Reveal** to show the full key, or **Copy** to copy it to your clipboard.
+
+    Your API key starts with the prefix `tb_` followed by a unique identifier.
+  </Step>
+</Steps>
+
+## Using your API key
+
+Include your API key in the `Authorization` header of every request:
+
+```bash
+Authorization: Bearer tb_your-api-key
+```
+
+### Example request
+
+```bash
+curl -X GET https://your-store.toebox.ai/api/agents \
+  -H "Authorization: Bearer tb_your-api-key" \
+  -H "Content-Type: application/json"
+```
+
+## MCP endpoint authentication
+
+The MCP endpoint uses the same API key but passes it as a query parameter:
+
+```
+https://your-store.toebox.ai/mcp?api_key=tb_your-api-key
+```
+
+This format is required for compatibility with MCP clients (Claude Desktop, Cursor, etc.) that do not support custom headers.
+
+### MCP configuration example
+
+```json
+{
+  "mcpServers": {
+    "toebox": {
+      "url": "https://your-store.toebox.ai/mcp?api_key=tb_your-api-key"
+    }
+  }
+}
+```
+
+## Security best practices
+
+<Warning>
+Treat your API key like a password. Anyone with your API key can access your ToeBox agents and data.
+</Warning>
+
+- **Do not commit keys to version control** -- Use environment variables instead
+- **Do not expose keys in client-side code** -- API calls should be made from your server
+- **Rotate keys if compromised** -- Contact support@toebox.ai to regenerate your API key
+- **Use HTTPS** -- All ToeBox API endpoints require HTTPS. HTTP requests are rejected.
+
+## Key format
+
+| Component | Format |
+|-----------|--------|
+| Prefix | `tb_` |
+| Key body | 32-character alphanumeric string |
+| Full example | `tb_a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6` |

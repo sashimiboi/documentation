@@ -1,0 +1,96 @@
+---
+title: "Data Warehouses"
+description: "Connect Snowflake, PostgreSQL, and other data warehouses to ToeBox"
+---
+
+ToeBox integrates with data warehouses so you can build analytics dashboards and give your agents access to business data beyond what Shopify provides natively.
+
+## Supported warehouses
+
+| Warehouse | Connection Type | Status |
+|-----------|----------------|--------|
+| **Snowflake** | Connection string | Available |
+| **PostgreSQL** | Connection string | Available |
+
+## Snowflake setup
+
+<Steps>
+  <Step title="Create a read-only user (recommended)">
+    In your Snowflake account, create a dedicated user for ToeBox:
+
+    ```sql
+    CREATE USER toebox_reader PASSWORD = 'your-secure-password';
+    CREATE ROLE toebox_role;
+    GRANT USAGE ON WAREHOUSE COMPUTE_WH TO ROLE toebox_role;
+    GRANT USAGE ON DATABASE your_database TO ROLE toebox_role;
+    GRANT USAGE ON SCHEMA your_database.public TO ROLE toebox_role;
+    GRANT SELECT ON ALL TABLES IN SCHEMA your_database.public TO ROLE toebox_role;
+    GRANT ROLE toebox_role TO USER toebox_reader;
+    ```
+  </Step>
+
+  <Step title="Add the integration in ToeBox">
+    Navigate to **Integrations** and click **Connect** on the Snowflake card. Fill in:
+
+    - **Account** -- Your Snowflake account ID (e.g., `xy12345.us-east-1`)
+    - **Username** -- `toebox_reader`
+    - **Password** -- The password you set
+    - **Warehouse** -- `COMPUTE_WH` (or your preferred warehouse)
+    - **Database** -- The database name
+    - **Schema** -- The default schema (typically `PUBLIC`)
+  </Step>
+
+  <Step title="Test the connection">
+    Click **Test Connection**. ToeBox will attempt to connect and list available tables. If successful, click **Save**.
+  </Step>
+</Steps>
+
+## PostgreSQL setup
+
+<Steps>
+  <Step title="Create a read-only user (recommended)">
+    ```sql
+    CREATE USER toebox_reader WITH PASSWORD 'your-secure-password';
+    GRANT CONNECT ON DATABASE your_database TO toebox_reader;
+    GRANT USAGE ON SCHEMA public TO toebox_reader;
+    GRANT SELECT ON ALL TABLES IN SCHEMA public TO toebox_reader;
+    ALTER DEFAULT PRIVILEGES IN SCHEMA public
+      GRANT SELECT ON TABLES TO toebox_reader;
+    ```
+  </Step>
+
+  <Step title="Add the integration in ToeBox">
+    Navigate to **Integrations** and click **Connect** on the PostgreSQL card. Fill in:
+
+    - **Host** -- Your database host
+    - **Port** -- Default is `5432`
+    - **Database** -- The database name
+    - **Username** -- `toebox_reader`
+    - **Password** -- The password you set
+    - **SSL** -- Enable if required by your database provider
+  </Step>
+
+  <Step title="Test the connection">
+    Click **Test Connection** to verify. If successful, click **Save**.
+  </Step>
+</Steps>
+
+<Warning>Always use a **read-only** database user. While ToeBox only executes SELECT queries, a read-only user provides defense in depth against accidental data modification.</Warning>
+
+## Schema browser
+
+Once a data warehouse is connected, ToeBox provides a schema browser in the Analytics page:
+
+- Browse all tables in your database
+- View column names and data types
+- Preview sample data
+- Copy table and column names into your SQL queries
+
+The schema browser is also used by the AI Assistant to understand your database structure when generating SQL queries.
+
+## Security considerations
+
+- **Credentials are encrypted** at rest in ToeBox's database
+- **Network access** -- Ensure your database allows connections from ToeBox's IP addresses. Contact support@toebox.ai for the current IP allowlist.
+- **Read-only access** -- ToeBox enforces read-only queries at the application level, but using a read-only database user adds an additional safety layer
+- **No data storage** -- Query results are streamed to your browser and are not stored on ToeBox servers

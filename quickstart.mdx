@@ -1,80 +1,86 @@
 ---
 title: "Quickstart"
-description: "Start building awesome documentation in minutes"
+description: "Get up and running with ToeBox in under 10 minutes"
 ---
 
-## Get started in three steps
+Follow these steps to install ToeBox, create your first AI agent, and deploy a chatbot on your Shopify storefront.
 
-Get your documentation site running locally and make your first customization.
+<Steps>
+  <Step title="Install from the Shopify App Store">
+    Search for **ToeBox** in the [Shopify App Store](https://apps.shopify.com) and click **Install**. ToeBox will be added to your Shopify admin sidebar.
 
-### Step 1: Set up your local environment
+    After installation, you will land on the ToeBox dashboard. Your store is automatically connected -- no additional Shopify configuration is needed.
 
-<AccordionGroup>
-  <Accordion icon="copy" title="Clone your docs locally">
-    During the onboarding process, you created a GitHub repository with your docs content if you didn't already have one. You can find a link to this repository in your [dashboard](https://dashboard.mintlify.com).
-    
-    To clone the repository locally so that you can make and preview changes to your docs, follow the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) guide in the GitHub docs.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Start the preview server">
-    1. Install the Mintlify CLI: `npm i -g mint`
-    2. Navigate to your docs directory and run: `mint dev`
-    3. Open `http://localhost:3000` to see your docs live!
-    
-    <Tip>Your preview updates automatically as you edit files.</Tip>
-  </Accordion>
-</AccordionGroup>
+    <Tip>All paid plans include a **14-day free trial**. You will not be charged until the trial ends.</Tip>
+  </Step>
 
-### Step 2: Deploy your changes
+  <Step title="Create your first agent">
+    Navigate to **Agents** in the sidebar and click **Create Agent**.
 
-<AccordionGroup>
-  <Accordion icon="github" title="Install our GitHub app">
-    Install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app).
-    
-    Our GitHub app automatically deploys your changes to your docs site, so you don't need to manage deployments yourself.
-</Accordion>
-<Accordion icon="palette" title="Update your site name and colors">
-    For a first change, let's update the name and colors of your docs site.
+    1. Give your agent a name (e.g., "Support Bot").
+    2. Select an agent type. **Customer Support** is a great starting point.
+    3. Choose a model. **Claude Sonnet 4.6** is the default and recommended for most use cases.
+    4. Write a system prompt describing how the agent should behave, or use the auto-generated default.
+    5. Click **Save**.
 
-    1. Open `docs.json` in your editor.
-    2. Change the `"name"` field to your project name.
-    3. Update the `"colors"` to match your brand.
-    4. Save and see your changes instantly at `http://localhost:3000`.
+    <Note>You can adjust temperature, max tokens, and other settings later from the agent detail view.</Note>
+  </Step>
 
-    <Tip>Try changing the primary color to see an immediate difference!</Tip>
-  </Accordion>
-</AccordionGroup>
+  <Step title="Configure Shopify MCP tools">
+    While editing your agent, open the **MCP Tools** section.
 
-### Step 3: Go live
+    - **Shopify Catalog** -- Lets your agent search products, retrieve details, and filter by price and availability.
+    - **Shopify Checkout** -- Lets your agent create checkout sessions and complete purchases.
 
-<Accordion icon="rocket" title="Publish your docs">
-  1. Commit and push your changes.
-  2. Your docs will update and be live in moments!
-</Accordion>
+    Toggle on the tools you need and click **Save**. ToeBox connects to Shopify's official MCP servers automatically.
+  </Step>
+
+  <Step title="Test your agent">
+    Click the **Test** button on your agent card. A test chat panel opens where you can send messages and see how your agent responds.
+
+    Try asking something like:
+    ```
+    What sneakers do you have under $100?
+    ```
+
+    The agent will use its connected Shopify tools to search your catalog and respond.
+  </Step>
+
+  <Step title="Deploy a chatbot widget">
+    Navigate to **Chatbot** in the sidebar and click **Create Chatbot**.
+
+    1. Name your chatbot and select the agent you just created.
+    2. Customize the widget appearance -- colors, bubble style, position, and welcome message.
+    3. Add suggested prompts that visitors will see when they open the chat.
+    4. Click **Save**.
+
+    ToeBox automatically injects the chat widget on your Shopify storefront. No theme code editing required.
+  </Step>
+
+  <Step title="View analytics">
+    Navigate to **Analytics** in the sidebar. Here you can:
+
+    - Create dashboards with charts, KPIs, and tables
+    - Write SQL queries against connected data sources
+    - Use the AI Assistant to ask data questions in plain English
+
+    <Tip>The AI Assistant can generate charts from natural language questions and export them directly to your dashboards.</Tip>
+  </Step>
+</Steps>
 
 ## Next steps
 
-Now that you have your docs running, explore these key features:
-
 <CardGroup cols={2}>
-
-<Card title="Write Content" icon="pen-to-square" href="/essentials/markdown">
-  Learn MDX syntax and start writing your documentation.
-</Card>
-
-<Card title="Customize style" icon="palette" href="/essentials/settings">
-  Make your docs match your brand perfectly.
-</Card>
-
-<Card title="Add code examples" icon="square-code" href="/essentials/code">
-  Include syntax-highlighted code blocks.
-</Card>
-
-<Card title="API documentation" icon="code" href="/api-reference/introduction">
-  Auto-generate API docs from OpenAPI specs.
-</Card>
-
+  <Card title="Agent Tools" icon="wrench" href="/guides/agent-tools">
+    Learn about MCP tools, custom SQL tools, and the custom tool builder.
+  </Card>
+  <Card title="Chatbot Customization" icon="palette" href="/guides/chatbot-customization">
+    Fine-tune your widget with custom colors, CSS, and branding.
+  </Card>
+  <Card title="Bring Your Own Key" icon="key" href="/guides/byok">
+    Use your own API keys from Anthropic, OpenAI, or OpenRouter.
+  </Card>
+  <Card title="API Reference" icon="code" href="/api-reference/introduction">
+    Integrate ToeBox programmatically with the REST API.
+  </Card>
 </CardGroup>
-
-<Note>
-  **Need help?** See our [full documentation](https://mintlify.com/docs) or join our [community](https://mintlify.com/community).
-</Note>

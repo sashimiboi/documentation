@@ -1,0 +1,73 @@
+---
+title: "Bring Your Own Key"
+description: "Use your own AI provider API keys with ToeBox"
+---
+
+ToeBox supports Bring Your Own Key (BYOK), letting you use your own API keys from AI providers instead of ToeBox's built-in credits.
+
+## Why use your own keys?
+
+- **Cost control** -- Pay your AI provider directly and avoid per-credit pricing
+- **Higher rate limits** -- Use your own account's rate limits instead of shared platform limits
+- **Model access** -- Access models that may not be available on ToeBox's default tier
+- **Enterprise compliance** -- Route API calls through your own provider agreements and data processing terms
+
+## Supported providers
+
+| Provider | Key format | Models available |
+|----------|-----------|-----------------|
+| **Anthropic** | `sk-ant-...` | Claude Sonnet 4.6, Claude Haiku 4.5, Claude Opus 4.6 |
+| **OpenAI** | `sk-...` | GPT-4o, GPT-4.1, GPT-4.1 Mini (via OpenRouter) |
+| **OpenRouter** | `sk-or-...` | All models on OpenRouter (GPT-4o, Gemini, Llama, DeepSeek, etc.) |
+
+## Setting up BYOK
+
+<Steps>
+  <Step title="Navigate to Settings">
+    Go to **Settings** in the ToeBox sidebar. Scroll down to the **AI Model Keys** section.
+  </Step>
+
+  <Step title="Enter your API key">
+    Click the provider you want to configure and paste your API key. Supported providers:
+
+    - **Anthropic** -- Get your key from [console.anthropic.com](https://console.anthropic.com)
+    - **OpenRouter** -- Get your key from [openrouter.ai/keys](https://openrouter.ai/keys)
+  </Step>
+
+  <Step title="Test the key">
+    Click **Test** to verify that the key is valid and has the necessary permissions. ToeBox will make a small test request to confirm connectivity.
+  </Step>
+
+  <Step title="Save">
+    Click **Save**. Your key is now active and will be used for all agent and assistant requests that use models from that provider.
+  </Step>
+</Steps>
+
+## How keys are stored
+
+<Note>
+Your API keys are stored **locally in your browser only**. They are never sent to or stored on ToeBox servers. Keys are included in API requests directly from your browser to the AI provider.
+</Note>
+
+This means:
+
+- Keys do not persist across browsers or devices
+- Clearing your browser data will remove stored keys
+- Other team members must enter their own keys
+
+## Fallback behavior
+
+ToeBox uses a priority chain when making AI requests:
+
+1. **Your BYOK key** -- If you have entered a key for the model's provider, it is used first
+2. **Platform key** -- If no BYOK key is configured, ToeBox uses its built-in platform credits (subject to your plan's credit limits)
+
+This fallback is automatic. If your BYOK key is invalid or expired, ToeBox will fall back to platform credits and display a warning.
+
+## Managing keys
+
+- **Update** -- Paste a new key to replace the existing one
+- **Remove** -- Clear the key field and save to remove a BYOK key
+- **Test** -- Re-test a key at any time to verify it is still valid
+
+<Tip>If you use ToeBox heavily, BYOK with an Anthropic key is often more cost-effective than relying on platform credits, especially on the Free or Starter plans.</Tip>

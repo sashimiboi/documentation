@@ -1,0 +1,94 @@
+---
+title: "Widget Config"
+description: "Retrieve chatbot widget configuration for embedding"
+---
+
+## Get widget configuration
+
+Retrieve the configuration for a chatbot widget. This endpoint is used by the embed script to load the widget's appearance and behavior settings.
+
+### Endpoint
+
+```
+GET /api/widget/config
+```
+
+### Query parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `chatbot_id` | string | Yes | The chatbot ID |
+
+### Headers
+
+| Header | Value | Required |
+|--------|-------|----------|
+| `Authorization` | `Bearer tb_your-api-key` | Yes |
+
+### Response
+
+```json
+{
+  "chatbot_id": "cb_abc123",
+  "agent_id": "agent_def456",
+  "name": "Storefront Assistant",
+  "config": {
+    "welcome_message": "Hi there! How can I help you today?",
+    "suggested_prompts": [
+      "What's new this week?",
+      "Help me find running shoes",
+      "Track my order",
+      "What's your return policy?"
+    ],
+    "theme": {
+      "primary_color": "#303030",
+      "background_color": "#FFFFFF",
+      "text_color": "#1A1A1A",
+      "user_message_color": "#303030",
+      "bot_message_color": "#F3F4F6"
+    },
+    "bubble_style": "rounded",
+    "position": "bottom-right",
+    "title": "Support",
+    "subtitle": "We typically reply instantly"
+  }
+}
+```
+
+### Response fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `chatbot_id` | string | Unique chatbot identifier |
+| `agent_id` | string | The agent powering this chatbot |
+| `name` | string | Internal chatbot name |
+| `config.welcome_message` | string | Initial message shown to visitors |
+| `config.suggested_prompts` | array | Clickable prompt suggestions |
+| `config.theme` | object | Color configuration |
+| `config.bubble_style` | string | `rounded`, `square`, or `pill` |
+| `config.position` | string | `bottom-right` or `bottom-left` |
+| `config.title` | string | Chat window header title |
+| `config.subtitle` | string | Optional subtitle text |
+
+### Error responses
+
+| Status | Description |
+|--------|-------------|
+| `400` | Missing `chatbot_id` parameter |
+| `401` | Invalid or missing API key |
+| `404` | Chatbot not found |
+| `500` | Internal server error |
+
+### Usage with embed script
+
+The embed script calls this endpoint automatically when loading:
+
+```html
+<script
+  src="https://your-store.toebox.ai/embed/chatbot.js"
+  data-chatbot-id="cb_abc123"
+  async
+></script>
+```
+
+The script fetches the widget config and renders the chat bubble with the configured theme, position, and behavior. You do not need to call this endpoint manually unless you are building a custom integration.

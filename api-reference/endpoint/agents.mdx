@@ -1,0 +1,133 @@
+---
+title: "Agents"
+description: "List and create agent configurations"
+---
+
+## List agents
+
+Retrieve all agents for your store.
+
+### Endpoint
+
+```
+GET /api/agents
+```
+
+### Headers
+
+| Header | Value | Required |
+|--------|-------|----------|
+| `Authorization` | `Bearer tb_your-api-key` | Yes |
+
+### Response
+
+```json
+{
+  "agents": [
+    {
+      "id": "agent_abc123",
+      "name": "Support Bot",
+      "type": "customer_support",
+      "description": "Handles customer inquiries and product questions",
+      "config": {
+        "model_provider": "anthropic",
+        "model_id": "claude-sonnet-4-6",
+        "system_prompt": "You are a helpful shopping assistant...",
+        "temperature": 0.7,
+        "max_tokens": 4096,
+        "mcp_capabilities": [
+          { "type": "catalog", "enabled": true }
+        ]
+      },
+      "created_at": "2025-01-15T10:30:00Z",
+      "updated_at": "2025-01-20T14:22:00Z"
+    }
+  ]
+}
+```
+
+### Response fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | string | Unique agent identifier |
+| `name` | string | Agent display name |
+| `type` | string | Agent type (e.g., `customer_support`, `product_recommendation`) |
+| `description` | string | Optional agent description |
+| `config` | object | Agent configuration (model, prompt, tools) |
+| `created_at` | string | ISO 8601 creation timestamp |
+| `updated_at` | string | ISO 8601 last update timestamp |
+
+---
+
+## Create an agent
+
+Create a new agent configuration.
+
+### Endpoint
+
+```
+POST /api/agents
+```
+
+### Headers
+
+| Header | Value | Required |
+|--------|-------|----------|
+| `Authorization` | `Bearer tb_your-api-key` | Yes |
+| `Content-Type` | `application/json` | Yes |
+
+### Request body
+
+```json
+{
+  "name": "Product Finder",
+  "type": "product_recommendation",
+  "description": "Helps customers find the right products",
+  "config": {
+    "model_provider": "anthropic",
+    "model_id": "claude-sonnet-4-6",
+    "system_prompt": "You are a product recommendation assistant for a sneaker store. Help customers find the perfect pair based on their preferences, budget, and intended use.",
+    "temperature": 0.7,
+    "max_tokens": 4096,
+    "mcp_capabilities": [
+      { "type": "catalog", "enabled": true }
+    ]
+  }
+}
+```
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `name` | string | Yes | Agent display name |
+| `type` | string | Yes | Agent type |
+| `description` | string | No | Short description |
+| `config.model_provider` | string | Yes | `anthropic`, `openrouter`, or `bedrock` |
+| `config.model_id` | string | Yes | Model identifier (e.g., `claude-sonnet-4-6`) |
+| `config.system_prompt` | string | Yes | The system prompt |
+| `config.temperature` | number | No | 0.0 to 1.0 (default: 0.7) |
+| `config.max_tokens` | number | No | Max response tokens (default: 4096) |
+| `config.mcp_capabilities` | array | No | MCP tool connections |
+
+### Response
+
+```json
+{
+  "id": "agent_def456",
+  "name": "Product Finder",
+  "type": "product_recommendation",
+  "description": "Helps customers find the right products",
+  "config": { ... },
+  "created_at": "2025-01-21T09:00:00Z",
+  "updated_at": "2025-01-21T09:00:00Z"
+}
+```
+
+### Error responses
+
+| Status | Description |
+|--------|-------------|
+| `400` | Invalid request body |
+| `401` | Invalid or missing API key |
+| `403` | Agent limit reached for your plan |
+| `500` | Internal server error |

@@ -1,33 +1,85 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: "API Overview"
+description: "Introduction to the ToeBox REST API"
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+The ToeBox API lets you interact with your agents, chatbots, and analytics programmatically. Use it to send messages, manage agent configurations, and retrieve widget settings.
 
-## Welcome
+## Base URL
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+All API requests are made to your ToeBox instance:
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+```
+https://your-store.toebox.ai/api
+```
+
+Replace `your-store` with your ToeBox subdomain (usually your Shopify shop name without `.myshopify.com`).
 
 ## Authentication
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+All API endpoints require authentication using your ToeBox API key. Include it as a Bearer token in the `Authorization` header:
+
+```bash
+curl -X GET https://your-store.toebox.ai/api/agents \
+  -H "Authorization: Bearer tb_your-api-key"
+```
+
+Find your API key in **Settings > API Keys** within the ToeBox dashboard.
+
+<Warning>Keep your API key secret. Do not expose it in client-side code, public repositories, or browser-accessible files.</Warning>
+
+## Response format
+
+All responses are returned as JSON. Successful responses include the data directly:
 
 ```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+{
+  "agents": [
+    {
+      "id": "agent_abc123",
+      "name": "Support Bot",
+      "type": "customer_support",
+      "status": "active"
+    }
+  ]
+}
 ```
+
+Error responses include an `error` field:
+
+```json
+{
+  "error": "Invalid API key",
+  "status": 401
+}
+```
+
+## Rate limits
+
+API rate limits depend on your plan:
+
+| Plan | Requests per minute |
+|------|-------------------|
+| Free | 20 |
+| Starter | 60 |
+| Pro | 200 |
+| Enterprise | Custom |
+
+Rate-limited requests return a `429 Too Many Requests` status code with a `Retry-After` header.
+
+## Available endpoints
+
+<CardGroup cols={2}>
+  <Card title="Chat" icon="comments" href="/api-reference/endpoint/chat">
+    Send messages to your agents and receive streaming responses.
+  </Card>
+  <Card title="Agents" icon="robot" href="/api-reference/endpoint/agents">
+    List and create agent configurations.
+  </Card>
+  <Card title="Widget Config" icon="window" href="/api-reference/endpoint/widget-config">
+    Retrieve chatbot widget configuration for embedding.
+  </Card>
+  <Card title="Authentication" icon="key" href="/api-reference/authentication">
+    Learn how to authenticate and manage API keys.
+  </Card>
+</CardGroup>

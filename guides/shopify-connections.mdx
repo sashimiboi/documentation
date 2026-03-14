@@ -1,0 +1,82 @@
+---
+title: "Shopify Connections"
+description: "How ToeBox integrates with your Shopify store data"
+---
+
+ToeBox connects directly to your Shopify store through the Shopify API and official MCP servers. This gives your agents real-time access to products, orders, and customer data.
+
+## Automatic connection
+
+When you install ToeBox from the Shopify App Store, your store is automatically connected. No additional OAuth setup or API key configuration is required.
+
+ToeBox requests the following API scopes during installation:
+
+| Scope | What it enables |
+|-------|----------------|
+| **Products** | Read product titles, descriptions, prices, variants, images, and inventory levels |
+| **Orders** | Read order details, line items, fulfillment status, and tracking information |
+| **Customers** | Read customer profiles, order history, and contact information |
+
+<Note>ToeBox uses **read-only** access by default. Your store data is never modified by ToeBox agents unless you explicitly configure checkout capabilities.</Note>
+
+## What agents can access
+
+Depending on the MCP tools you enable, your agents can:
+
+### Product data
+- Search your catalog by keyword, category, or attributes
+- Retrieve product details including pricing, variants, and availability
+- Browse collections and tags
+- Filter by price range, stock status, or vendor
+
+### Order data
+- Look up orders by order number or customer email
+- Check fulfillment and shipping status
+- Retrieve tracking numbers and delivery estimates
+- View order line items and totals
+
+### Customer data
+- Look up customer profiles
+- View order history for a specific customer
+- Check loyalty or rewards status (if configured)
+
+## Shopify MCP servers
+
+ToeBox connects to two official Shopify MCP servers:
+
+<AccordionGroup>
+  <Accordion title="Shopify Catalog (Product Discovery)">
+    **Endpoint:** `https://discover.shopifyapps.com/global/mcp`
+
+    This is Shopify's global product discovery API. It enables cross-merchant product search and retrieval. Your agent uses this to find and recommend products from your catalog.
+
+    Automatically enabled for: Product Recommendation, Customer Support, Marketing, Sales Assistant, Inventory Management, Loyalty & Rewards, Content & SEO, Analytics & Reporting agent types.
+  </Accordion>
+
+  <Accordion title="Shopify Checkout">
+    **Endpoint:** `https://{your-shop}.myshopify.com/api/ucp/mcp`
+
+    This is your store-specific checkout API. It enables cart creation, buyer info collection, and purchase completion. Your agent uses this to guide customers through the buying process.
+
+    Automatically enabled for: Marketing and Sales Assistant agent types.
+  </Accordion>
+</AccordionGroup>
+
+## Shopify app integrations
+
+Beyond the core Shopify connection, ToeBox supports integrations with popular Shopify apps:
+
+| App | Category | Status |
+|-----|----------|--------|
+| Klaviyo | Email & SMS Marketing | Coming soon |
+| Gorgias | Customer Support | Coming soon |
+| Judge.me | Reviews | Coming soon |
+| Postscript | SMS Marketing | Coming soon |
+| Triple Whale | Analytics & Attribution | Coming soon |
+| Rebuy | Upsell & Cross-sell | Coming soon |
+| Yotpo | Reviews & Loyalty | Coming soon |
+| Recharge | Subscriptions | Coming soon |
+| Loop | Returns | Coming soon |
+| ShipBob | Fulfillment | Coming soon |
+
+<Tip>Want a specific integration? Contact us at support@toebox.ai and let us know which apps are most important to your store.</Tip>

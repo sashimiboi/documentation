@@ -1,0 +1,66 @@
+---
+title: "AI Assistant"
+description: "Ask data questions in natural language with the ToeBox AI Assistant"
+---
+
+The ToeBox AI Assistant is a conversational analytics tool built into the Analytics page. Ask questions about your data in plain English and get charts, tables, and insights in return.
+
+## Using the AI Assistant
+
+<Steps>
+  <Step title="Open the Assistant">
+    Navigate to **Analytics** and click the **AI Assistant** tab.
+  </Step>
+
+  <Step title="Ask a question">
+    Type a question in natural language. For example:
+
+    - "What were our top 10 products by revenue last month?"
+    - "Show me daily order count for the past 30 days"
+    - "Compare this quarter's sales to last quarter"
+    - "What's the average order value by customer segment?"
+  </Step>
+
+  <Step title="Review the results">
+    The assistant generates a SQL query, executes it against your connected data source, and displays the results as a chart or table. You can see:
+
+    - The generated SQL query
+    - A visualization of the results
+    - The raw data in table format
+  </Step>
+
+  <Step title="Export to dashboard">
+    If the chart is useful, click **Export to Dashboard** to add it directly to one of your dashboards. The chart, query, and configuration are all preserved.
+  </Step>
+</Steps>
+
+## Model selection
+
+The AI Assistant can use different models depending on your preference and available API keys:
+
+| Provider | Models |
+|----------|--------|
+| **Anthropic** | Claude Sonnet 4.6, Claude Haiku 4.5, Claude Opus 4.6 |
+| **OpenRouter** | GPT-4o, GPT-4.1, Gemini 2.5 Flash/Pro, Llama 4, DeepSeek V3 |
+| **AWS Bedrock** | Claude Sonnet 4.6, Claude Haiku 4.5 |
+
+Select your preferred model from the dropdown in the Assistant panel. If you have configured BYOK (Bring Your Own Key), your keys are used automatically.
+
+<Tip>Claude Sonnet 4.6 is recommended for the AI Assistant. It provides the best balance of SQL generation quality and response speed.</Tip>
+
+## How it works
+
+1. Your natural language question is sent to the selected AI model
+2. The model generates a SQL query based on your database schema
+3. The query is executed against your connected data source (read-only)
+4. Results are returned and automatically visualized as the most appropriate chart type
+5. You can modify the chart type, formatting, or query as needed
+
+## Tips for better results
+
+- **Be specific** -- "Revenue by product category for Q1 2025" is better than "show me revenue"
+- **Mention time ranges** -- The assistant handles dates well when you specify them
+- **Reference table names** -- If you know your schema, mention specific tables for more accurate queries
+- **Iterate** -- Follow up with refinements like "break that down by month" or "add a filter for orders over $100"
+
+<Note>The AI Assistant only executes read-only queries. It cannot modify your data.</Note>

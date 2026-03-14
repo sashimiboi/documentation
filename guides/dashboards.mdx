@@ -1,0 +1,87 @@
+---
+title: "Analytics Dashboards"
+description: "Build interactive dashboards with drag-and-drop charts"
+---
+
+ToeBox Analytics lets you create custom dashboards to visualize your store data, agent performance, and any connected data sources.
+
+## Creating a dashboard
+
+<Steps>
+  <Step title="Open Analytics">
+    Navigate to **Analytics** in the ToeBox sidebar.
+  </Step>
+
+  <Step title="Create a new dashboard">
+    Click **New Dashboard** in the sidebar. Give it a name (e.g., "Sales Overview", "Agent Performance").
+  </Step>
+
+  <Step title="Add charts">
+    Click the **+** button to add a new chart widget to your dashboard. Each widget is configured independently with its own data source and visualization type.
+  </Step>
+</Steps>
+
+## Chart types
+
+ToeBox supports a variety of chart types to visualize your data:
+
+| Chart Type | Best For |
+|------------|----------|
+| **Bar** | Comparing categories (top products, sales by region) |
+| **Line** | Trends over time (daily revenue, weekly orders) |
+| **Area** | Volume trends with emphasis on magnitude |
+| **Pie** | Proportions and percentages (traffic sources, product mix) |
+| **Scatter** | Correlations between two variables |
+| **Table** | Detailed data with sorting and filtering |
+| **KPI** | Single key metrics (total revenue, conversion rate) |
+| **Markdown** | Text notes, descriptions, and documentation within dashboards |
+
+## Configuring a chart
+
+Each chart widget has the following settings:
+
+- **Title** -- The chart heading displayed on the dashboard
+- **Chart type** -- Select from the types above
+- **Data source** -- Choose a connected database or integration
+- **SQL query** -- Write the SQL query that powers the chart
+- **Format options** -- Configure axes, colors, legends, and number formatting
+
+### Color palettes
+
+Choose from built-in color palettes or define custom colors for your chart series. Palettes include options for categorical data, sequential data, and brand-aligned themes.
+
+## Drag-and-drop layout
+
+Dashboards use a drag-and-drop grid layout powered by react-grid-layout:
+
+- **Resize** -- Drag the corner of any widget to resize it
+- **Reorder** -- Drag the header of a widget to move it to a new position
+- **Auto-save** -- Layout changes are saved automatically
+
+<Tip>Arrange your most important KPIs at the top of the dashboard for a quick overview, with detailed charts below.</Tip>
+
+## Dashboard management
+
+- **Rename** -- Click the dashboard name to edit it
+- **Duplicate** -- Create a copy of an existing dashboard
+- **Delete** -- Remove a dashboard permanently
+- **Share** -- Generate a shareable link for your dashboard
+
+## Sharing dashboards
+
+Dashboards can be shared with team members or external stakeholders:
+
+- **Private** -- Only you can view and edit (default)
+- **Shared link** -- Anyone with the link can view the dashboard (read-only)
+
+<Note>Shared dashboards refresh data in real-time. Viewers see the latest data each time they open the link.</Note>
+
+## Controls and filters
+
+Add interactive controls to your dashboards that filter data across multiple charts:
+
+- **Dropdown** -- Select from predefined values
+- **Date range** -- Filter by date period
+- **Text input** -- Free-text search filters
+
+Controls are linked to chart queries via parameter placeholders, so changing a filter updates all connected charts simultaneously.

@@ -1,0 +1,98 @@
+---
+title: "Data Sources"
+description: "Connect databases and data warehouses to ToeBox Analytics"
+---
+
+ToeBox Analytics can query data from external databases and data warehouses. Connect your data sources to build dashboards, power the AI Assistant, and give your agents access to business data.
+
+## Supported data sources
+
+| Source | Status |
+|--------|--------|
+| **Snowflake** | Available |
+| **PostgreSQL** | Available |
+| **Custom SQL** | Available (via integrations) |
+
+## Connecting Snowflake
+
+<Steps>
+  <Step title="Go to Integrations">
+    Navigate to **Integrations** in the ToeBox sidebar. Find **Snowflake** under the Data Warehouses category.
+  </Step>
+
+  <Step title="Enter connection details">
+    Provide the following:
+
+    - **Account** -- Your Snowflake account identifier (e.g., `xy12345.us-east-1`)
+    - **Username** -- The Snowflake user
+    - **Password** -- The user's password
+    - **Warehouse** -- The compute warehouse to use (e.g., `COMPUTE_WH`)
+    - **Database** -- The database to connect to
+    - **Schema** -- The default schema (e.g., `PUBLIC`)
+  </Step>
+
+  <Step title="Test and save">
+    Click **Test Connection** to verify. If successful, click **Save**.
+  </Step>
+</Steps>
+
+## Connecting PostgreSQL
+
+<Steps>
+  <Step title="Go to Integrations">
+    Navigate to **Integrations** and find **PostgreSQL** under Data Warehouses.
+  </Step>
+
+  <Step title="Enter connection details">
+    Provide the following:
+
+    - **Host** -- The database host (e.g., `db.example.com`)
+    - **Port** -- The port number (default: 5432)
+    - **Database** -- The database name
+    - **Username** -- The database user
+    - **Password** -- The user's password
+    - **SSL** -- Enable if your database requires SSL connections
+  </Step>
+
+  <Step title="Test and save">
+    Click **Test Connection** to verify. If successful, click **Save**.
+  </Step>
+</Steps>
+
+<Warning>Always use a **read-only** database user for ToeBox connections. ToeBox only executes SELECT queries, but using a read-only user provides an additional layer of safety.</Warning>
+
+## Schema browser
+
+Once connected, ToeBox provides a schema browser that shows:
+
+- All tables in the connected database
+- Column names and data types for each table
+- Sample data previews
+
+The schema browser is available in the Analytics SQL editor and is used by the AI Assistant to understand your data structure.
+
+## SQL transpiler
+
+ToeBox includes an automatic SQL transpiler that converts queries between SQL dialects. This means:
+
+- Queries written for PostgreSQL syntax work on Snowflake and vice versa
+- The AI Assistant generates standard SQL that is automatically adapted to your data source
+- You do not need to worry about dialect-specific syntax differences
+
+## Custom SQL queries
+
+You can write custom SQL queries directly in the Analytics page:
+
+1. Open a dashboard and add a new chart
+2. Select your data source from the dropdown
+3. Write your SQL query in the editor
+4. Click **Run** to execute and see results
+5. Configure the chart type and formatting
+
+The SQL editor includes:
+- Syntax highlighting
+- Auto-completion for table and column names
+- Query execution history
+- Error highlighting
+
+<Tip>Use the schema browser panel alongside the SQL editor to reference table structures without switching contexts.</Tip>

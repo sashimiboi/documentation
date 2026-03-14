@@ -1,0 +1,101 @@
+---
+title: "MCP Connections"
+description: "Understanding and configuring Model Context Protocol connections"
+---
+
+The Model Context Protocol (MCP) is an open standard that lets AI models interact with external tools and data sources. ToeBox uses MCP to connect your agents to Shopify and other services.
+
+## What is MCP?
+
+MCP provides a standardized way for AI agents to:
+
+- **Discover tools** -- Agents learn what tools are available and what they do
+- **Call tools** -- Agents can invoke tools with structured parameters
+- **Receive results** -- Tool outputs are returned in a format the agent understands
+
+This means your ToeBox agents can search products, create checkouts, query databases, and more -- all through a unified protocol.
+
+## Transport: Streamable HTTP
+
+ToeBox uses **Streamable HTTP** as the MCP transport protocol. This is simpler than WebSocket or SSE-based transports:
+
+- No persistent connections to manage
+- Works through standard HTTP proxies and firewalls
+- Each tool call is a single HTTP request/response
+
+<Note>You do not need to configure transport settings. ToeBox handles the connection setup automatically.</Note>
+
+## Connecting Shopify MCP servers
+
+ToeBox comes with pre-configured connections to Shopify's official MCP servers:
+
+<Tabs>
+  <Tab title="Shopify Catalog">
+    **What it does:** Product search and discovery across your Shopify store.
+
+    **Endpoint:** `https://discover.shopifyapps.com/global/mcp`
+
+    **Available tools:**
+    - `search_products` -- Search by keyword, filter by price, availability
+    - `get_product_details` -- Retrieve full product information
+    - `browse_collections` -- List and browse product collections
+
+    This is automatically enabled for agent types that need product data (Product Recommendation, Customer Support, Marketing, Sales Assistant, etc.).
+  </Tab>
+
+  <Tab title="Shopify Checkout">
+    **What it does:** Create and manage checkout sessions for your store.
+
+    **Endpoint:** `https://{your-shop}.myshopify.com/api/ucp/mcp`
+
+    **Available tools:**
+    - `create_cart` -- Start a new checkout session
+    - `add_to_cart` -- Add products to the cart
+    - `complete_checkout` -- Finalize and process the order
+
+    This is enabled for Sales Assistant and Marketing agent types by default.
+  </Tab>
+</Tabs>
+
+## Testing MCP connections
+
+You can test MCP connections from the agent configuration page:
+
+1. Open your agent's settings
+2. Navigate to the **MCP Tools** section
+3. Each connected server shows a status indicator (connected/disconnected)
+4. Use the **Test** button to verify the connection is working
+
+<Warning>If a connection test fails, check that your Shopify store is active and that the required API scopes are granted. ToeBox needs product and checkout scopes to function.</Warning>
+
+## Exposing your agents via MCP
+
+ToeBox also provides an **MCP endpoint** that lets external tools connect to your agents. This means you can use your ToeBox agents from:
+
+- **Claude Desktop**
+- **Claude Code**
+- **Cursor**
+- **VS Code**
+- Any MCP-compatible client
+
+Find your MCP endpoint URL in **Settings > MCP Endpoint**. The connection URL format is:
+
+```
+https://{your-store}.toebox.ai/mcp?api_key=tb_xxxxx
+```
+
+### Claude Desktop / Claude Code configuration
+
+Add this to your MCP configuration file:
+
+```json
+{
+  "mcpServers": {
+    "toebox": {
+      "url": "https://your-store.toebox.ai/mcp?api_key=tb_your-api-key"
+    }
+  }
+}
+```
+
+<Tip>The MCP endpoint uses Streamable HTTP transport. No WebSocket or SSE setup is needed -- just paste the URL into any MCP client.</Tip>
